@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= title %></title>
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cyborg/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
   </head>
   <body>
 
@@ -81,11 +82,15 @@
 	      <div class="panel-heading">
 		<h2 class="panel-title">Customer reviews</h2>
               </div>
-	      <div class="panel-body">
-		<p><b>Author</b></p>
-		<p><b>Title</b></p>
-		<p><b>Rating</b></p>
-		<p>Banh mi hella Echo Park photo booth ugh, aesthetic Helvetica mustache paleo DIY. Food truck pop-up irony salvia. Meggings retro disrupt, keffiyeh umami beard Wes Anderson cliche paleo. Banh mi Marfa art party twee. American Apparel pickled bitters, readymade post-ironic deep v Shoreditch pug 3 wolf moon crucifix VHS. Fingerstache disrupt street art occupy, put a bird on it forage gluten-free Bushwick Banksy distillery biodiesel vegan. Put a bird on it pork belly Carles tousled readymade.</p>
+	      <div class="panel-body review-container">
+		<div class="row">
+		  <div class="review" ng-repeat="comment in item.comments">
+		    <p><b>Author</b> {{comment.author}}</p>
+		    <p><b>Title</b> </p>
+		    <p><b>Rating</b> </p>
+		    <p></p>
+		  </div>
+		</div>
 	      </div>
 	    </div>
 	  </div>
@@ -109,11 +114,12 @@
       //---------------
 
       .controller('ItemController', ['$scope', 'Items', function ($scope, Items) {
-      $scope.items = Items.query();
+        $scope.items = Items.query();
       }])
 
       .controller('ItemDetailControler', ['$scope', '$routeParams', 'Items', function ($scope, $routeParams, Items) {
-      $scope.item = Items.get({id: $routeParams.id });
+        $scope.item = Items.get({id: $routeParams.id });
+        $scope.test = "Test";
       }])
       
       //---------------
@@ -121,16 +127,16 @@
       //---------------
 
       .config(['$routeProvider', function ($routeProvider) {
-      $routeProvider
-      .when('/', {
-      templateUrl: '/items.html',
-      controller: 'ItemController'
-      })
+        $routeProvider
+          .when('/', {
+            templateUrl: '/items.html',
+            controller: 'ItemController'
+          })
 
-      .when('/:id', {
-      templateUrl: '/itemDetail.html',
-      controller: 'ItemDetailControler'
-      })
+          .when('/:id', {
+            templateUrl: '/itemDetail.html',
+            controller: 'ItemDetailControler'
+          })
       }]);
     </script>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
