@@ -1,0 +1,13 @@
+var express = require('express');
+var router = express.Router();
+
+var mongoose = require('mongoose');
+var Item = require('../models/Items.js');
+
+var sendJSONresponse = function(res, status, content) {
+    res.status(status);
+    res.json(content);
+};
+
+
+module.exports = router;
