@@ -171,8 +171,9 @@
         $scope.test = "Test";
       }])
 
-      .controller('ItemReviewController', ['$scope','$resource', '$routeParams', 'Items', function ($scope, $resource, $routeParams, Items){
+      .controller('ItemReviewController', ['$scope', '$location', '$resource', '$routeParams', 'Items', function ($scope, $location, $resource, $routeParams, Items){
         var Menu = $resource('/items/:id/review', {id: $routeParams.id});
+        $scope.itemID = $routeParams.id;
 
         $scope.Item = Items.get({id: $routeParams.id});
         $scope.save = function(){
@@ -189,6 +190,9 @@
 
           menu.$save();
           console.log(menu);
+          console.log($scope.itemID);
+          var p = '/' + $scope.itemID;
+          $location.path(p);
         };
       }])
       //---------------
